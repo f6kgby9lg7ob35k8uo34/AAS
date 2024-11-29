@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Exam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f8ff;
+    }
+
+    .timer {
+      text-align: center;
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .time-box {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .unit {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 1rem;
+      color: #ddd;
+    }
+
+    .time-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="timer">
+    <h1>Countdown to Exam</h1>
+    <div class="time-box">
+      <div class="time-container">
+        <div id="days" class="unit">--</div>
+        <div class="label">Days</div>
+      </div>
+      <div class="time-container">
+        <div id="hours" class="unit">--</div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="time-container">
+        <div id="minutes" class="unit">--</div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="time-container">
+        <div id="seconds" class="unit">--</div>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Target date: December 2nd, 11:59 PM
+    const targetDate = new Date('December 2, 2024 23:59:59').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      if (timeLeft < 0) {
+        document.querySelector('.timer').innerHTML = '<h1>Exam Time!</h1>';
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
